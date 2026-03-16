@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e2e8f0"/>
+      <stop offset="100%" style="stop-color:#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="cell1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a855f7"/>
+    </linearGradient>
+    <linearGradient id="cell2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899"/>
+      <stop offset="100%" style="stop-color:#f472b6"/>
+    </linearGradient>
+    <linearGradient id="cell3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#22d3ee"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.08)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+    </radialGradient>
+    <clipPath id="circleClip">
+      <circle cx="256" cy="240" r="155"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern (microscope field) -->
+  <g opacity="0.06" clip-path="url(#circleClip)">
+    <line x1="106" y1="240" x2="406" y2="240" stroke="#fff" stroke-width="0.8"/>
+    <line x1="256" y1="90" x2="256" y2="390" stroke="#fff" stroke-width="0.8"/>
+    <line x1="181" y1="90" x2="181" y2="390" stroke="#fff" stroke-width="0.5"/>
+    <line x1="331" y1="90" x2="331" y2="390" stroke="#fff" stroke-width="0.5"/>
+    <line x1="106" y1="165" x2="406" y2="165" stroke="#fff" stroke-width="0.5"/>
+    <line x1="106" y1="315" x2="406" y2="315" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Microscope viewing circle (outer ring) -->
+  <circle cx="256" cy="240" r="160" fill="none" stroke="url(#ring)" stroke-width="8" opacity="0.7"/>
+  <circle cx="256" cy="240" r="155" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+
+  <!-- Lens reflection -->
+  <circle cx="256" cy="240" r="155" fill="url(#lens)"/>
+
+  <!-- Cell 1 - large, top-left -->
+  <g clip-path="url(#circleClip)">
+    <!-- Cell membrane -->
+    <ellipse cx="210" cy="195" rx="65" ry="55" fill="url(#cell1)" opacity="0.35" stroke="url(#cell1)" stroke-width="2" stroke-opacity="0.7"/>
+    <!-- Nucleus -->
+    <ellipse cx="215" cy="190" rx="25" ry="22" fill="url(#cell1)" opacity="0.6"/>
+    <!-- Nucleolus -->
+    <circle cx="218" cy="188" r="8" fill="#c084fc" opacity="0.8"/>
+
+    <!-- Cell 2 - medium, right -->
+    <ellipse cx="330" cy="250" rx="50" ry="58" fill="url(#cell2)" opacity="0.3" stroke="url(#cell2)" stroke-width="2" stroke-opacity="0.6"/>
+    <ellipse cx="325" cy="255" rx="20" ry="23" fill="url(#cell2)" opacity="0.55"/>
+    <circle cx="323" cy="253" r="7" fill="#f9a8d4" opacity="0.8"/>
+
+    <!-- Cell 3 - small, bottom-left -->
+    <ellipse cx="195" cy="310" rx="42" ry="38" fill="url(#cell3)" opacity="0.3" stroke="url(#cell3)" stroke-width="1.5" stroke-opacity="0.6"/>
+    <ellipse cx="198" cy="308" rx="16" ry="14" fill="url(#cell3)" opacity="0.55"/>
+    <circle cx="200" cy="306" r="5" fill="#67e8f9" opacity="0.8"/>
+
+    <!-- Cell 4 - tiny, scattered -->
+    <ellipse cx="280" cy="160" rx="28" ry="25" fill="url(#cell1)" opacity="0.2" stroke="url(#cell1)" stroke-width="1" stroke-opacity="0.4"/>
+    <circle cx="282" cy="158" r="9" fill="url(#cell1)" opacity="0.4"/>
+
+    <!-- Cell 5 - partial, edge -->
+    <ellipse cx="155" cy="250" rx="35" ry="30" fill="url(#cell2)" opacity="0.2" stroke="url(#cell2)" stroke-width="1" stroke-opacity="0.4"/>
+    <circle cx="158" cy="248" r="10" fill="url(#cell2)" opacity="0.35"/>
+
+    <!-- Small dots (cellular debris / small particles) -->
+    <circle cx="260" cy="310" r="4" fill="#a78bfa" opacity="0.4"/>
+    <circle cx="300" cy="180" r="3" fill="#f9a8d4" opacity="0.3"/>
+    <circle cx="170" cy="170" r="3" fill="#67e8f9" opacity="0.3"/>
+    <circle cx="350" cy="320" r="5" fill="#c084fc" opacity="0.25"/>
+    <circle cx="230" cy="350" r="3.5" fill="#22d3ee" opacity="0.3"/>
+  </g>
+
+  <!-- Text "CYTO" at bottom -->
+  <text x="256" y="448" text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="52" letter-spacing="12" fill="#e2e8f0" opacity="0.85">CYTO</text>
+
+  <!-- Subtle bottom accent line -->
+  <line x1="176" y1="462" x2="336" y2="462" stroke="url(#cell1)" stroke-width="2" opacity="0.5"/>
+</svg>

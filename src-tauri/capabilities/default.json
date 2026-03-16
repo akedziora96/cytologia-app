@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicholasxjy/tauri-docs/refs/heads/v2/references/.schema/capability.schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": ["main"],
+  "permissions": [
+    "sql:default",
+    "sql:allow-execute",
+    "sql:allow-select",
+    "dialog:default",
+    "dialog:allow-save",
+    "fs:default",
+    "fs:allow-write-text-file",
+    "fs:allow-write-file"
+  ]
+}
