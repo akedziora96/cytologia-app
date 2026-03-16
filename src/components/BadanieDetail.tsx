@@ -9,6 +9,7 @@ interface Props {
   badanie: Badanie;
   onEdit: () => void;
   onDelete: () => void;
+  pwz?: string;
 }
 
 function Field({ label, value }: { label: string; value?: string }) {
@@ -31,10 +32,10 @@ function Section({ title, content }: { title: string; content?: string }) {
   );
 }
 
-export default function BadanieDetail({ badanie, onEdit, onDelete }: Props) {
+export default function BadanieDetail({ badanie, onEdit, onDelete, pwz }: Props) {
   const handlePDF = async () => {
     const logo = await loadLogoBase64();
-    const doc = generujPDF(badanie, logo);
+    const doc = generujPDF(badanie, logo, pwz);
     const defaultName = `${numerBadania(badanie)}_${badanie.imie_zwierzecia}.pdf`;
 
     const filePath = await save({

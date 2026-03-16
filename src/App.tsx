@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { Stethoscope } from "lucide-react";
-import type { Badanie, BadanieForm as FormData } from "./lib/types";
-import { numerBadania } from "./lib/types";
-import { pobierzWszystkie, szukaj, zapisz, aktualizuj, usun } from "./lib/db";
+import type { Badanie, BadanieForm as FormData, Ustawienia } from "./lib/types";
+import { numerBadania, EMPTY_USTAWIENIA } from "./lib/types";
+import { pobierzWszystkie, szukaj, zapisz, aktualizuj, usun, pobierzUstawienia, zapiszUstawienia } from "./lib/db";
 import HistoriaList from "./components/HistoriaList";
 import BadanieForm from "./components/BadanieForm";
 import BadanieDetail from "./components/BadanieDetail";
+import UstawieniaModal from "./components/UstawieniaModal";
 
 type View = "list" | "new" | "edit" | "detail";
 
@@ -14,6 +15,8 @@ export default function App() {
   const [selected, setSelected] = useState<Badanie | null>(null);
   const [view, setView] = useState<View>("list");
   const [search, setSearch] = useState("");
+  const [ustawienia, setUstawienia] = useState<Ustawienia>(EMPTY_USTAWIENIA);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const reload = useCallback(async () => {
     const data = search.trim()
@@ -24,6 +27,7 @@ export default function App() {
 
   useEffect(() => {
     reload();
+    pobierzUstawienia().then(setUstawienia);
   }, [reload]);
 
   const handleNew = () => {
@@ -60,10 +64,16 @@ export default function App() {
     setView(selected ? "detail" : "list");
   };
 
+  const handleSaveSettings = async (u: Ustawienia) => {
+    await zapiszUstawienia(u);
+    setUstawienia(u);
+    setSettingsOpen(false);
+  };
+
   const renderContent = () => {
     switch (view) {
       case "new":
-        return <BadanieForm onSubmit={handleSave} onCancel={handleCancel} />;
+        return <BadanieForm onSubmit={handleSave} onCancel={handleCancel} ustawienia={ustawienia} />;
       case "edit":
         return selected ? (
           <BadanieForm initial={selected} onSubmit={handleSave} onCancel={handleCancel} isEdit />
@@ -74,6 +84,7 @@ export default function App() {
             badanie={selected}
             onEdit={() => setView("edit")}
             onDelete={handleDelete}
+            pwz={ustawienia.pwz}
           />
         ) : null;
       default:
@@ -96,10 +107,17 @@ export default function App() {
         onSearchChange={setSearch}
         onSelect={handleSelect}
         onNew={handleNew}
+        onSettings={() => setSettingsOpen(true)}
       />
       <main className="content">
         {renderContent()}
       </main>
+      <UstawieniaModal
+        open={settingsOpen}
+        initial={ustawienia}
+        onSave={handleSaveSettings}
+        onClose={() => setSettingsOpen(false)}
+      />
     </div>
   );
 }

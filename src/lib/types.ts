@@ -5,12 +5,10 @@ export interface Badanie {
   rasa: string;
   plec: string;
   wiek: string;
-  nr_chipa: string;
   wlasciciel: string;
   data_badania: string;
   material: string;
   informacje_kliniczne: string;
-  ocena_makroskopowa: string;
   ocena_mikroskopowa: string;
   rozpoznanie: string;
   klasyfikacja: string;
@@ -28,12 +26,10 @@ export const EMPTY_FORM: BadanieForm = {
   rasa: "",
   plec: "",
   wiek: "",
-  nr_chipa: "",
   wlasciciel: "",
   data_badania: new Date().toISOString().slice(0, 10),
   material: "Biopsja aspiracyjna cienkoigłowa (BAC)",
   informacje_kliniczne: "",
-  ocena_makroskopowa: "",
   ocena_mikroskopowa: "",
   rozpoznanie: "",
   klasyfikacja: "",

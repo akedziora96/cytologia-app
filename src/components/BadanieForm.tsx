@@ -1,16 +1,29 @@
 import { useState } from "react";
-import type { BadanieForm as FormData } from "../lib/types";
+import type { BadanieForm as FormData, Ustawienia } from "../lib/types";
 import { GATUNEK_OPTIONS, MATERIAL_OPTIONS, KLASYFIKACJA_OPTIONS, EMPTY_FORM } from "../lib/types";
+
+function lekarzFromUstawienia(u?: Ustawienia): string {
+  if (!u || (!u.imie_lekarza && !u.nazwisko_lekarza)) return "";
+  const parts = [u.tytul, u.imie_lekarza, u.nazwisko_lekarza].filter(Boolean);
+  return parts.join(" ");
+}
 
 interface Props {
   initial?: FormData;
   onSubmit: (data: FormData) => void;
   onCancel: () => void;
   isEdit?: boolean;
+  ustawienia?: Ustawienia;
 }
 
-export default function BadanieForm({ initial, onSubmit, onCancel, isEdit }: Props) {
-  const [form, setForm] = useState<FormData>(initial ?? { ...EMPTY_FORM });
+export default function BadanieForm({ initial, onSubmit, onCancel, isEdit, ustawienia }: Props) {
+  const [form, setForm] = useState<FormData>(() => {
+    if (initial) return initial;
+    const defaults = { ...EMPTY_FORM };
+    const lekarz = lekarzFromUstawienia(ustawienia);
+    if (lekarz) defaults.lekarz = lekarz;
+    return defaults;
+  });
 
   const set = (key: keyof FormData, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -59,10 +72,6 @@ export default function BadanieForm({ initial, onSubmit, onCancel, isEdit }: Pro
             Wiek
             <input value={form.wiek} onChange={(e) => set("wiek", e.target.value)} placeholder="np. 5 lat, 8 mies." />
           </label>
-          <label>
-            Nr chipa
-            <input value={form.nr_chipa} onChange={(e) => set("nr_chipa", e.target.value)} maxLength={15} placeholder="000000000000000" />
-          </label>
         </div>
         <label>
           Właściciel
@@ -98,10 +107,6 @@ export default function BadanieForm({ initial, onSubmit, onCancel, isEdit }: Pro
 
       <fieldset>
         <legend>Wyniki</legend>
-        <label>
-          Ocena makroskopowa
-          <textarea rows={3} value={form.ocena_makroskopowa} onChange={(e) => set("ocena_makroskopowa", e.target.value)} />
-        </label>
         <label>
           Ocena mikroskopowa
           <textarea rows={4} value={form.ocena_mikroskopowa} onChange={(e) => set("ocena_mikroskopowa", e.target.value)} />

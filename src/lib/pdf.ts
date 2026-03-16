@@ -23,7 +23,7 @@ function reg(d: jsPDF) {
   fontsOk = true;
 }
 
-export function generujPDF(b: Badanie, logo?: string | null): jsPDF {
+export function generujPDF(b: Badanie, logo?: string | null, pwz?: string): jsPDF {
   const d = new jsPDF({ unit: "mm", format: "a4" });
   reg(d);
   d.setFont("Arial", "normal");
@@ -135,9 +135,13 @@ export function generujPDF(b: Badanie, logo?: string | null): jsPDF {
   const areaX = m + cw - totalW;
   const areaY = ph - 38;
 
-  // PWZ — label centered, line below
+  // PWZ — label centered, value below
   d.setFontSize(6.5); d.setTextColor(...DV); d.setFont("Arial", "normal");
   d.text("Nr PWZ", areaX + pwzW / 2, areaY, { align: "center" });
+  if (pwz) {
+    d.setFontSize(9); d.setTextColor(...DK); d.setFont("Arial", "bold");
+    d.text(pwz, areaX + pwzW / 2, areaY + 5, { align: "center" });
+  }
   d.setDrawColor(...BR); d.setLineWidth(0.3);
   d.line(areaX, areaY + 8, areaX + pwzW, areaY + 8);
 

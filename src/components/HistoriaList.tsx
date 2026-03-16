@@ -1,4 +1,4 @@
-import { Cat, Dog } from "lucide-react";
+import { Cat, Dog, Settings } from "lucide-react";
 import type { Badanie } from "../lib/types";
 
 interface Props {
@@ -7,6 +7,7 @@ interface Props {
   onSearchChange: (val: string) => void;
   onSelect: (b: Badanie) => void;
   onNew: () => void;
+  onSettings: () => void;
 }
 
 function SpeciesIcon({ gatunek }: { gatunek: string }) {
@@ -14,12 +15,17 @@ function SpeciesIcon({ gatunek }: { gatunek: string }) {
   return <Dog size={14} />;
 }
 
-export default function HistoriaList({ badania, search, onSearchChange, onSelect, onNew }: Props) {
+export default function HistoriaList({ badania, search, onSearchChange, onSelect, onNew, onSettings }: Props) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <h2>Historia badań</h2>
-        <button className="btn-primary btn-sm" onClick={onNew}>+ Nowe</button>
+        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+          <button className="btn-secondary btn-sm" onClick={onSettings} title="Ustawienia lekarza" style={{ padding: "6px 8px" }}>
+            <Settings size={14} />
+          </button>
+          <button className="btn-primary btn-sm" onClick={onNew}>+ Nowe</button>
+        </div>
       </div>
       <input
         className="search-input"

@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/nicholasxjy/tauri-docs/refs/heads/v2/references/.schema/config.schema.json",
   "productName": "Cytologia",
   "version": "1.0.0",
-  "identifier": "com.cytologia.app",
+  "identifier": "com.cytologia.desktop",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
