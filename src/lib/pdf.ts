@@ -13,14 +13,11 @@ const BR: [number, number, number] = [226, 232, 240]; // --border / --slate-200
 const DV: [number, number, number] = [148, 163, 184]; // --slate-400
 const AC: [number, number, number] = [29, 78, 216];   // --accent / --blue-700
 
-let fontsOk = false;
 function reg(d: jsPDF) {
-  if (fontsOk) return;
   d.addFileToVFS("AR.ttf", Arial_Regular);
   d.addFileToVFS("AB.ttf", Arial_Bold);
   d.addFont("AR.ttf", "Arial", "normal");
   d.addFont("AB.ttf", "Arial", "bold");
-  fontsOk = true;
 }
 
 export function generujPDF(b: Badanie, logo?: string | null, pwz?: string): jsPDF {
